@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Submit cybersecurity threat reports and case studies to ZACTIC Hub - Zambia's Cyber Threat Intelligence Community">
+  <title>ZACTIC Hub – Submit Threat Reports</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --primary-dark: #0b5ed7;
+      --primary-light: #e7f1ff;
+      --secondary: #6c757d;
+      --success: #198754;
+      --danger: #dc3545;
+      --warning: #ffc107;
+      --bg-light: #f9fafb;
+      --gray-dark: #343a40;
+      --gray-medium: #6c757d;
+      --gray-light: #e9ecef;
+      --font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --border-radius: 0.375rem;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+    
+    /* Skip to content link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px;
+      z-index: 100;
+      transition: top 0.3s;
+    }
+    
+    .skip-link:focus {
+      top: 0;
+    }
+    
+    /* Navigation */
+    nav {
+      background: white;
+      padding: 1rem 2rem;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .navbar-brand i {
+      font-size: 1.2em;
+    }
+    
+    .navbar-nav {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    
+    .navbar-nav a {
+      text-decoration: none;
+      color: var(--gray-dark);
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: var(--transition);
+    }
+    
+    .navbar-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+    
+    .navbar-nav a.active,
+    .navbar-nav a:hover {
+      color: var(--primary);
+    }
+    
+    .navbar-nav a.active::after,
+    .navbar-nav a:hover::after {
+      width: 100%;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      text-align: center;
+      border: 2px solid transparent;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Main content */
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    h1 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+    
+    .form-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .form-header p {
+      color: var(--gray-medium);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--gray-dark);
+    }
+    
+    .form-label.required::after {
+      content: '*';
+      color: var(--danger);
+      margin-left: 0.25rem;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid var(--gray-light);
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    .form-control[readonly] {
+      background-color: var(--gray-light);
+      cursor: not-allowed;
+    }
+    
+    .form-select {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid var(--gray-light);
+      border-radius: var(--border-radius);
+      background-color: white;
+      transition: var(--transition);
+    }
+    
+    .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    .file-upload {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+    
+    .file-upload-input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    
+    .file-upload-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      border: 2px dashed var(--gray-light);
+      border-radius: var(--border-radius);
+      background-color: white;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .file-upload-label:hover {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+    }
+    
+    .file-upload-icon {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .file-upload-text {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .file-upload-hint {
+      color: var(--gray-medium);
+      font-size: 0.875rem;
+    }
+    
+    .file-name {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--gray-medium);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .file-name i {
+      color: var(--primary);
+    }
+    
+    .form-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .btn-submit {
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    
+    .message {
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .message.success {
+      background-color: #d1e7dd;
+      color: #0f5132;
+      border: 1px solid #badbcc;
+    }
+    
+    .message.error {
+      background-color: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+    }
+    
+    .message.warning {
+      background-color: #fff3cd;
+      color: #664d03;
+      border: 1px solid #ffecb5;
+    }
+    
+    .message-icon {
+      font-size: 1.25rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      .navbar-nav {
+        margin: 1rem 0;
+      }
+      
+      main {
+        padding: 1.5rem;
+        margin: 1.5rem;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+      }
+      
+      .btn-submit {
+        width: 100%;
+      }
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate {
+      animation: fadeIn 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <nav>
+    <a href="index.html" class="navbar-brand">
+      <i class="fas fa-shield-alt"></i> ZACTIC Hub
+    </a>
+    <ul class="navbar-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="reports.html" class="active">Threat Reports</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <a href="login.html" class="btn btn-outline">Login</a>
+      <a href="register.html" class="btn btn-primary">Register</a>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <div class="form-header animate">
+      <h1>Submit Threat Report</h1>
+      <p>Contribute to Zambia's cybersecurity knowledge by sharing your threat reports and case studies</p>
+    </div>
+    
+    <form id="reportForm" enctype="multipart/form-data" novalidate>
+      <div class="form-group animate" style="animation-delay: 0.1s;">
+        <label for="author" class="form-label required">Author Name</label>
+        <input type="text" id="author" name="author" class="form-control" placeholder="Your full name" required>
+      </div>
+      
+      <div class="form-group animate" style="animation-delay: 0.2s;">
+        <label for="title" class="form-label required">Report Title</label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="Title of the report" required>
+      </div>
+      
+      <div class="form-group animate" style="animation-delay: 0.3s;">
+        <label for="type" class="form-label required">Report Type</label>
+        <select id="type" name="type" class="form-select" required>
+          <option value="">-- Select Report Type --</option>
+          <option value="Technical Report">Technical Report</option>
+          <option value="Case Study">Case Study</option>
+          <option value="Research Paper">Research Paper</option>
+          <option value="Incident Report">Incident Report</option>
+          <option value="Threat Analysis">Threat Analysis</option>
+        </select>
+      </div>
+      
+      <div class="form-group animate" style="animation-delay: 0.4s;">
+        <label for="dateSubmitted" class="form-label">Date Submitted</label>
+        <input type="text" id="dateSubmitted" name="dateSubmitted" class="form-control" readonly>
+      </div>
+      
+      <div class="form-group animate" style="animation-delay: 0.5s;">
+        <label class="form-label required">Report File</label>
+        <div class="file-upload">
+          <input type="file" id="file" name="file" class="file-upload-input" accept="application/pdf" required>
+          <label for="file" class="file-upload-label">
+            <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+            <span class="file-upload-text">Click to upload PDF file</span>
+            <span class="file-upload-hint">Maximum file size: 10MB</span>
+          </label>
+        </div>
+        <div id="fileNameDisplay" class="file-name" style="display: none;">
+          <i class="fas fa-file-pdf"></i>
+          <span id="fileName"></span>
+        </div>
+      </div>
+      
+      <div class="form-group animate" style="animation-delay: 0.6s;">
+        <div class="form-check">
+          <input type="checkbox" id="consent" name="consent" class="form-check-input" required>
+          <label for="consent" class="form-check-label">
+            I confirm that this report does not contain any sensitive or classified information
+          </label>
+        </div>
+      </div>
+      
+      <div class="form-actions animate" style="animation-delay: 0.7s;">
+        <button type="submit" class="btn btn-primary btn-submit">
+          <i class="fas fa-paper-plane"></i> Submit Report
+        </button>
+        <button type="reset" class="btn btn-outline">
+          <i class="fas fa-undo"></i> Reset Form
+        </button>
+      </div>
+    </form>
+    
+    <div id="message" class="message" style="display: none;">
+      <i id="messageIcon" class="fas message-icon"></i>
+      <span id="messageText"></span>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div class="social-links">
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+    </div>
+    <p>&copy; 2025 ZACTIC Hub | Zambia Cyber Threat Intelligence Community</p>
+    <p><small>Made with <i class="fas fa-heart" style="color: #dc3545;"></i> for Zambia's cybersecurity</small></p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set current date and time
+      function getFormattedDate() {
+        const d = new Date();
+        const pad = n => n.toString().padStart(2, '0');
+        return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      }
+      
+      document.getElementById('dateSubmitted').value = getFormattedDate();
+      
+      // File upload display
+      const fileInput = document.getElementById('file');
+      const fileNameDisplay = document.getElementById('fileNameDisplay');
+      const fileName = document.getElementById('fileName');
+      
+      fileInput.addEventListener('change', function() {
+        if (this.files.length > 0) {
+          fileName.textContent = this.files[0].name;
+          fileNameDisplay.style.display = 'flex';
+          
+          // Validate file size (max 10MB)
+          if (this.files[0].size > 10 * 1024 * 1024) {
+            showMessage('File size exceeds 10MB limit. Please choose a smaller file.', 'error');
+            this.value = '';
+            fileNameDisplay.style.display = 'none';
+          }
+        } else {
+          fileNameDisplay.style.display = 'none';
+        }
+      });
+      
+      // Form submission
+      const form = document.getElementById('reportForm');
+      const message = document.getElementById('message');
+      const messageIcon = document.getElementById('messageIcon');
+      const messageText = document.getElementById('messageText');
+      
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate form
+        const author = form.author.value.trim();
+        const title = form.title.value.trim();
+        const type = form.type.value;
+        const file = fileInput.files[0];
+        const consent = form.consent.checked;
+        
+        if (!author || !title || !type || !file || !consent) {
+          showMessage('Please fill in all required fields and agree to the terms.', 'error');
+          return;
+        }
+        
+        if (file.type !== 'application/pdf') {
+          showMessage('Only PDF files are allowed. Please upload a PDF document.', 'error');
+          return;
+        }
+        
+        // Create report object
+        const report = {
+          id: Date.now(),
+          author,
+          title,
+          type,
+          fileName: file.name,
+          fileSize: (file.size / (1024 * 1024)).toFixed(2) + 'MB',
+          dateSubmitted: new Date().toISOString(),
+          status: 'Pending Review'
+        };
+        
+        // Save to localStorage
+        let reports = JSON.parse(localStorage.getItem('zacticReports')) || [];
+        reports.push(report);
+        localStorage.setItem('zacticReports', JSON.stringify(reports));
+        
+        // Show success message
+        showMessage('Thank you! Your report has been submitted successfully and is pending review.', 'success');
+        
+        // Reset form (except date)
+        form.reset();
+        fileNameDisplay.style.display = 'none';
+        document.getElementById('dateSubmitted').value = getFormattedDate();
+        
+        // Optional: Redirect to reports page after 3 seconds
+        // setTimeout(() => window.location.href = 'reports.html', 3000);
+      });
+      
+      // Show message function
+      function showMessage(text, type) {
+        messageText.textContent = text;
+        message.className = `message ${type}`;
+        message.style.display = 'flex';
+        
+        // Set appropriate icon
+        switch(type) {
+          case 'success':
+            messageIcon.className = 'fas fa-check-circle message-icon';
+            break;
+          case 'error':
+            messageIcon.className = 'fas fa-exclamation-circle message-icon';
+            break;
+          case 'warning':
+            messageIcon.className = 'fas fa-exclamation-triangle message-icon';
+            break;
+          default:
+            messageIcon.className = 'fas fa-info-circle message-icon';
+        }
+        
+        // Hide message after 5 seconds
+        setTimeout(() => {
+          message.style.display = 'none';
+        }, 5000);
+      }
+    });
+  </script>
+</body>
+</html>

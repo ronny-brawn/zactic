@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to ZACTIC Hub - Zambia's Cyber Threat Intelligence Community">
+  <title>ZACTIC Hub – Secure Login</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --primary-dark: #0b5ed7;
+      --primary-light: #e7f1ff;
+      --danger: #dc3545;
+      --success: #198754;
+      --warning: #ffc107;
+      --bg-light: #f9fafb;
+      --gray-dark: #343a40;
+      --gray-medium: #6c757d;
+      --gray-light: #e9ecef;
+      --font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --border-radius: 0.375rem;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--gray-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+    
+    /* Skip to content link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px;
+      z-index: 100;
+      transition: top 0.3s;
+    }
+    
+    .skip-link:focus {
+      top: 0;
+    }
+    
+    /* Navigation */
+    nav {
+      background: white;
+      padding: 1rem 2rem;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .navbar-brand i {
+      font-size: 1.2em;
+    }
+    
+    .navbar-nav {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    
+    .navbar-nav a {
+      text-decoration: none;
+      color: var(--gray-dark);
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: var(--transition);
+    }
+    
+    .navbar-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+    
+    .navbar-nav a.active,
+    .navbar-nav a:hover {
+      color: var(--primary);
+    }
+    
+    .navbar-nav a.active::after,
+    .navbar-nav a:hover::after {
+      width: 100%;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      text-align: center;
+      border: 2px solid transparent;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Main content */
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      padding: 2rem;
+    }
+    
+    .login-card {
+      width: 100%;
+      max-width: 450px;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-md);
+      padding: 2.5rem;
+      margin: 1rem 0;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .login-header h1 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+    
+    .login-header p {
+      color: var(--gray-medium);
+    }
+    
+    .login-logo {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    /* Form styles */
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--gray-dark);
+    }
+    
+    .form-label.required::after {
+      content: '*';
+      color: var(--danger);
+      margin-left: 0.25rem;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 1px solid var(--gray-light);
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    .input-icon {
+      position: absolute;
+      right: 1rem;
+      top: 2.6rem;
+      color: var(--gray-medium);
+      cursor: pointer;
+    }
+    
+    .password-toggle {
+      background: none;
+      border: none;
+      color: var(--gray-medium);
+      cursor: pointer;
+    }
+    
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .remember-me input {
+      width: auto;
+    }
+    
+    .forgot-password {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    
+    .forgot-password:hover {
+      text-decoration: underline;
+    }
+    
+    .btn-login {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    .login-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--gray-medium);
+    }
+    
+    .login-footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Social login */
+    .social-login {
+      margin: 1.5rem 0;
+      text-align: center;
+    }
+    
+    .social-login p {
+      position: relative;
+      color: var(--gray-medium);
+      margin: 1.5rem 0;
+    }
+    
+    .social-login p::before,
+    .social-login p::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 30%;
+      height: 1px;
+      background: var(--gray-light);
+    }
+    
+    .social-login p::before {
+      left: 0;
+    }
+    
+    .social-login p::after {
+      right: 0;
+    }
+    
+    .social-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid var(--gray-light);
+      color: var(--gray-dark);
+      transition: var(--transition);
+    }
+    
+    .social-btn:hover {
+      background: var(--bg-light);
+      transform: translateY(-2px);
+    }
+    
+    /* Message styles */
+    .message {
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .message.error {
+      background-color: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+    }
+    
+    .message-icon {
+      font-size: 1.25rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      .navbar-nav {
+        margin: 1rem 0;
+      }
+      
+      .login-card {
+        padding: 1.5rem;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <nav>
+    <a href="index.html" class="navbar-brand">
+      <i class="fas fa-shield-alt"></i> ZACTIC Hub
+    </a>
+    <ul class="navbar-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="reports.html">Threat Reports</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <a href="login.html" class="btn btn-outline active">Login</a>
+      <a href="register.html" class="btn btn-primary">Register</a>
+    </div>
+  </nav>
+
+  <div class="login-container">
+    <div class="login-card" id="main-content">
+      <div class="login-header">
+        <div class="login-logo">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h1>Secure Login</h1>
+        <p>Access your ZACTIC Hub account</p>
+      </div>
+      
+      <div id="error-message" class="message error" style="display: none;">
+        <i class="fas fa-exclamation-circle message-icon"></i>
+        <span id="error-text"></span>
+      </div>
+      
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label for="username" class="form-label required">Email Address</label>
+          <input type="email" id="username" name="username" class="form-control" 
+                 placeholder="Enter your email address" required
+                 autocomplete="username">
+          <i class="fas fa-envelope input-icon"></i>
+        </div>
+        
+        <div class="form-group">
+          <label for="password" class="form-label required">Password</label>
+          <input type="password" id="password" name="password" class="form-control" 
+                 placeholder="Enter your password" required
+                 autocomplete="current-password" minlength="8">
+          <i class="fas fa-lock input-icon"></i>
+          <button type="button" class="password-toggle" id="toggle-password" aria-label="Show password">
+            <i class="far fa-eye"></i>
+          </button>
+        </div>
+        
+        <div class="form-actions">
+          <div class="remember-me">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Remember me</label>
+          </div>
+          <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-login">
+          <i class="fas fa-sign-in-alt"></i> Log In
+        </button>
+        
+        <div class="social-login">
+          <p>Or continue with</p>
+          <div class="social-buttons">
+            <a href="#" class="social-btn" aria-label="Login with Google">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="social-btn" aria-label="Login with Microsoft">
+              <i class="fab fa-microsoft"></i>
+            </a>
+            <a href="#" class="social-btn" aria-label="Login with GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="login-footer">
+          Don't have an account? <a href="register.html">Register here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div class="social-links">
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+    </div>
+    <p>&copy; 2025 ZACTIC Hub | Zambia Cyber Threat Intelligence Community</p>
+    <p><small>Made with <i class="fas fa-heart" style="color: #dc3545;"></i> for Zambia's cybersecurity</small></p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Password toggle functionality
+      const togglePassword = document.getElementById('toggle-password');
+      const passwordInput = document.getElementById('password');
+      
+      togglePassword.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+      });
+      
+      // Form validation and submission
+      const loginForm = document.getElementById('login-form');
+      const errorMessage = document.getElementById('error-message');
+      const errorText = document.getElementById('error-text');
+      
+      loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Reset error message
+        errorMessage.style.display = 'none';
+        
+        // Get form values
+        const username = this.username.value.trim();
+        const password = this.password.value.trim();
+        const rememberMe = this.remember.checked;
+        
+        // Simple validation
+        if (!username || !password) {
+          showError('Please fill in all required fields');
+          return;
+        }
+        
+        if (!isValidEmail(username)) {
+          showError('Please enter a valid email address');
+          return;
+        }
+        
+        if (password.length < 8) {
+          showError('Password must be at least 8 characters');
+          return;
+        }
+        
+        // Simulate login request (replace with actual API call)
+        try {
+          // Show loading state
+          const submitBtn = this.querySelector('button[type="submit"]');
+          const originalBtnText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+          submitBtn.disabled = true;
+          
+          // Simulate network delay
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          
+          // Check for demo credentials
+          if (username === 'demo@zactic.org' && password === 'SecurePassword123') {
+            // Successful login - redirect to dashboard
+            window.location.href = 'dashboard.html';
+          } else {
+            // Invalid credentials
+            showError('Invalid email or password. Please try again.');
+          }
+        } catch (error) {
+          showError('An error occurred. Please try again later.');
+        } finally {
+          // Reset button state
+          const submitBtn = this.querySelector('button[type="submit"]');
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.disabled = false;
+        }
+      });
+      
+      function showError(message) {
+        errorText.textContent = message;
+        errorMessage.style.display = 'flex';
+        
+        // Auto-hide error after 5 seconds
+        setTimeout(() => {
+          errorMessage.style.display = 'none';
+        }, 5000);
+      }
+      
+      function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+      
+      // Check for error message in URL (for redirects from other pages)
+      const urlParams = new URLSearchParams(window.location.search);
+      const errorParam = urlParams.get('error');
+      
+      if (errorParam) {
+        showError(decodeURIComponent(errorParam));
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    });
+  </script>
+</body>
+</html>

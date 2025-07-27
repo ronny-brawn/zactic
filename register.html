@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Register for ZACTIC Hub - Zambia's Cyber Threat Intelligence Community">
+  <title>ZACTIC Hub – Create Account</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --primary-dark: #0b5ed7;
+      --primary-light: #e7f1ff;
+      --success: #198754;
+      --danger: #dc3545;
+      --warning: #ffc107;
+      --bg-light: #f9fafb;
+      --gray-dark: #343a40;
+      --gray-medium: #6c757d;
+      --gray-light: #e9ecef;
+      --font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --border-radius: 0.375rem;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--gray-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+    
+    /* Skip to content link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px;
+      z-index: 100;
+      transition: top 0.3s;
+    }
+    
+    .skip-link:focus {
+      top: 0;
+    }
+    
+    /* Navigation */
+    nav {
+      background: white;
+      padding: 1rem 2rem;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .navbar-brand i {
+      font-size: 1.2em;
+    }
+    
+    .navbar-nav {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    
+    .navbar-nav a {
+      text-decoration: none;
+      color: var(--gray-dark);
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: var(--transition);
+    }
+    
+    .navbar-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+    
+    .navbar-nav a.active,
+    .navbar-nav a:hover {
+      color: var(--primary);
+    }
+    
+    .navbar-nav a.active::after,
+    .navbar-nav a:hover::after {
+      width: 100%;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      text-align: center;
+      border: 2px solid transparent;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.8rem;
+    }
+    
+    /* Main content */
+    .register-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      padding: 2rem;
+    }
+    
+    .register-card {
+      width: 100%;
+      max-width: 450px;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-md);
+      padding: 2.5rem;
+      margin: 1rem 0;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .register-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .register-header h1 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+    
+    .register-header p {
+      color: var(--gray-medium);
+    }
+    
+    .register-logo {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    /* Form styles */
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--gray-dark);
+    }
+    
+    .form-label.required::after {
+      content: '*';
+      color: var(--danger);
+      margin-left: 0.25rem;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border: 1px solid var(--gray-light);
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    .input-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .input-group .form-control {
+      flex: 1;
+    }
+    
+    .input-group-btn {
+      flex: 0 0 auto;
+    }
+    
+    .password-strength {
+      height: 4px;
+      background: var(--gray-light);
+      border-radius: 2px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+    
+    .password-strength-bar {
+      height: 100%;
+      width: 0;
+      background: var(--danger);
+      transition: var(--transition);
+    }
+    
+    .password-hints {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--gray-medium);
+    }
+    
+    .password-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .password-hint.valid {
+      color: var(--success);
+    }
+    
+    .password-hint i {
+      font-size: 0.8rem;
+    }
+    
+    .input-icon {
+      position: absolute;
+      right: 1rem;
+      top: 2.6rem;
+      color: var(--gray-medium);
+      cursor: pointer;
+    }
+    
+    .password-toggle {
+      background: none;
+      border: none;
+      color: var(--gray-medium);
+      cursor: pointer;
+    }
+    
+    /* Verification code section */
+    .verification-section {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: var(--primary-light);
+      border-radius: var(--border-radius);
+    }
+    
+    .verification-section.active {
+      display: block;
+    }
+    
+    .verification-code {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    .verification-code input {
+      width: 3rem;
+      height: 3rem;
+      text-align: center;
+      font-size: 1.5rem;
+      border: 1px solid var(--gray-light);
+      border-radius: var(--border-radius);
+    }
+    
+    .verification-code input:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    
+    .verification-timer {
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--gray-medium);
+    }
+    
+    .verification-resend {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    
+    .verification-resend a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .verification-resend a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Message styles */
+    .message {
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .message.error {
+      background-color: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+    }
+    
+    .message.success {
+      background-color: #d1e7dd;
+      color: #0f5132;
+      border: 1px solid #badbcc;
+    }
+    
+    .message-info {
+      background-color: #cfe2ff;
+      color: #084298;
+      border: 1px solid #b6d4fe;
+    }
+    
+    .message-icon {
+      font-size: 1.25rem;
+    }
+    
+    .form-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--gray-medium);
+    }
+    
+    .form-footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .form-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .btn-register {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 1rem;
+    }
+    
+    /* Terms checkbox */
+    .terms-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    
+    .terms-check input {
+      margin-top: 0.25rem;
+    }
+    
+    .terms-text {
+      font-size: 0.9rem;
+      color: var(--gray-medium);
+    }
+    
+    .terms-text a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .terms-text a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      .navbar-nav {
+        margin: 1rem 0;
+      }
+      
+      .register-card {
+        padding: 1.5rem;
+      }
+      
+      .verification-code input {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <nav>
+    <a href="index.html" class="navbar-brand">
+      <i class="fas fa-shield-alt"></i> ZACTIC Hub
+    </a>
+    <ul class="navbar-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="reports.html">Threat Reports</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <a href="login.html" class="btn btn-outline">Login</a>
+      <a href="register.html" class="btn btn-primary">Register</a>
+    </div>
+  </nav>
+
+  <div class="register-container">
+    <div class="register-card" id="main-content">
+      <div class="register-header">
+        <div class="register-logo">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h1>Create Account</h1>
+        <p>Join Zambia's cybersecurity community</p>
+      </div>
+      
+      <div id="error-message" class="message error" style="display: none;">
+        <i class="fas fa-exclamation-circle message-icon"></i>
+        <span id="error-text"></span>
+      </div>
+      
+      <div id="info-message" class="message message-info" style="display: none;">
+        <i class="fas fa-info-circle message-icon"></i>
+        <span id="info-text"></span>
+      </div>
+      
+      <form id="register-form" novalidate>
+        <div class="form-group">
+          <label for="username" class="form-label required">Username</label>
+          <input type="text" id="username" name="username" class="form-control" 
+                 placeholder="Choose a username" required
+                 minlength="3" maxlength="20"
+                 pattern="[a-zA-Z0-9_]+" title="Only letters, numbers and underscores">
+          <small class="password-hints">3-20 characters, letters, numbers and underscores only</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="email" class="form-label required">Email Address</label>
+          <input type="email" id="email" name="email" class="form-control" 
+                 placeholder="Enter your email" required
+                 autocomplete="email">
+        </div>
+        
+        <div class="form-group">
+          <label for="phone" class="form-label required">Phone Number</label>
+          <div class="input-group">
+            <select id="country-code" class="form-control" style="flex: 0 0 100px;">
+              <option value="+260">+260 (ZM)</option>
+              <option value="+1">+1 (US)</option>
+              <option value="+44">+44 (UK)</option>
+              <option value="+27">+27 (ZA)</option>
+            </select>
+            <input type="tel" id="phone" name="phone" class="form-control" 
+                   placeholder="Enter phone number" required
+                   pattern="[0-9]{9,15}" title="Enter a valid phone number">
+          </div>
+          <small class="password-hints">Enter your mobile number for verification</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="password" class="form-label required">Password</label>
+          <input type="password" id="password" name="password" class="form-control" 
+                 placeholder="Create a password" required
+                 autocomplete="new-password" minlength="8">
+          <div class="password-strength">
+            <div class="password-strength-bar" id="password-strength-bar"></div>
+          </div>
+          <div class="password-hints" id="password-hints">
+            <div class="password-hint" id="hint-length">
+              <i class="far fa-circle"></i>
+              <span>At least 8 characters</span>
+            </div>
+            <div class="password-hint" id="hint-uppercase">
+              <i class="far fa-circle"></i>
+              <span>At least 1 uppercase letter</span>
+            </div>
+            <div class="password-hint" id="hint-lowercase">
+              <i class="far fa-circle"></i>
+              <span>At least 1 lowercase letter</span>
+            </div>
+            <div class="password-hint" id="hint-number">
+              <i class="far fa-circle"></i>
+              <span>At least 1 number</span>
+            </div>
+            <div class="password-hint" id="hint-special">
+              <i class="far fa-circle"></i>
+              <span>At least 1 special character</span>
+            </div>
+          </div>
+          <button type="button" class="password-toggle" id="toggle-password" aria-label="Show password">
+            <i class="far fa-eye"></i>
+          </button>
+        </div>
+        
+        <div class="form-group">
+          <label for="password2" class="form-label required">Confirm Password</label>
+          <input type="password" id="password2" name="password2" class="form-control" 
+                 placeholder="Confirm your password" required
+                 autocomplete="new-password">
+          <button type="button" class="password-toggle" id="toggle-password2" aria-label="Show password">
+            <i class="far fa-eye"></i>
+          </button>
+        </div>
+        
+        <div class="terms-check">
+          <input type="checkbox" id="terms" name="terms" required>
+          <label for="terms" class="terms-text">
+            I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>
+          </label>
+        </div>
+        
+        <div id="verification-section" class="verification-section">
+          <h3>Phone Verification</h3>
+          <p>We've sent a 6-digit code to <span id="verification-phone"></span></p>
+          
+          <div class="verification-code">
+            <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+            <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+            <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+            <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+            <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+            <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" autocomplete="off">
+          </div>
+          
+          <div class="verification-timer">
+            <span id="verification-timer">02:00</span> remaining
+          </div>
+          
+          <div class="verification-resend">
+            <a href="#" id="resend-code">Resend code</a>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-register" id="register-btn">
+          <i class="fas fa-user-plus"></i> Create Account
+        </button>
+        
+        <div class="form-footer">
+          Already have an account? <a href="login.html">Log in here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div class="social-links">
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+    </div>
+    <p>&copy; 2025 ZACTIC Hub | Zambia Cyber Threat Intelligence Community</p>
+    <p><small>Made with <i class="fas fa-heart" style="color: #dc3545;"></i> for Zambia's cybersecurity</small></p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Password toggle functionality
+      const togglePassword = document.getElementById('toggle-password');
+      const togglePassword2 = document.getElementById('toggle-password2');
+      const passwordInput = document.getElementById('password');
+      const passwordInput2 = document.getElementById('password2');
+      
+      togglePassword.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+      });
+      
+      togglePassword2.addEventListener('click', function() {
+        const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput2.setAttribute('type', type);
+        this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+      });
+      
+      // Password strength meter
+      passwordInput.addEventListener('input', function() {
+        const password = this.value;
+        const strengthBar = document.getElementById('password-strength-bar');
+        
+        // Reset all hints
+        document.querySelectorAll('.password-hint i').forEach(icon => {
+          icon.className = 'far fa-circle';
+          icon.parentElement.classList.remove('valid');
+        });
+        
+        // Check password requirements
+        const hasMinLength = password.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        
+        // Update hints
+        if (hasMinLength) {
+          document.getElementById('hint-length').classList.add('valid');
+          document.querySelector('#hint-length i').className = 'fas fa-check-circle';
+        }
+        if (hasUpperCase) {
+          document.getElementById('hint-uppercase').classList.add('valid');
+          document.querySelector('#hint-uppercase i').className = 'fas fa-check-circle';
+        }
+        if (hasLowerCase) {
+          document.getElementById('hint-lowercase').classList.add('valid');
+          document.querySelector('#hint-lowercase i').className = 'fas fa-check-circle';
+        }
+        if (hasNumber) {
+          document.getElementById('hint-number').classList.add('valid');
+          document.querySelector('#hint-number i').className = 'fas fa-check-circle';
+        }
+        if (hasSpecialChar) {
+          document.getElementById('hint-special').classList.add('valid');
+          document.querySelector('#hint-special i').className = 'fas fa-check-circle';
+        }
+        
+        // Calculate strength (0-100)
+        let strength = 0;
+        if (password.length > 0) strength += 20;
+        if (password.length >= 8) strength += 20;
+        if (hasUpperCase) strength += 20;
+        if (hasNumber) strength += 20;
+        if (hasSpecialChar) strength += 20;
+        
+        // Update strength bar
+        strengthBar.style.width = strength + '%';
+        
+        // Update color based on strength
+        if (strength < 40) {
+          strengthBar.style.backgroundColor = 'var(--danger)';
+        } else if (strength < 80) {
+          strengthBar.style.backgroundColor = 'var(--warning)';
+        } else {
+          strengthBar.style.backgroundColor = 'var(--success)';
+        }
+      });
+      
+      // Verification code input handling
+      const verificationInputs = document.querySelectorAll('.verification-code input');
+      verificationInputs.forEach((input, index) => {
+        input.addEventListener('input', function() {
+          if (this.value.length === 1) {
+            if (index < verificationInputs.length - 1) {
+              verificationInputs[index + 1].focus();
+            } else {
+              this.blur();
+              verifyCode();
+            }
+          }
+        });
+        
+        input.addEventListener('keydown', function(e) {
+          if (e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+            verificationInputs[index - 1].focus();
+          }
+        });
+      });
+      
+      // Timer functionality
+      let timerInterval;
+      function startTimer(duration, display) {
+        let timer = duration, minutes, seconds;
+        clearInterval(timerInterval);
+        timerInterval = setInterval(function() {
+          minutes = parseInt(timer / 60, 10);
+          seconds = parseInt(timer % 60, 10);
+          
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+          seconds = seconds < 10 ? "0" + seconds : seconds;
+          
+          display.textContent = minutes + ":" + seconds;
+          
+          if (--timer < 0) {
+            clearInterval(timerInterval);
+            document.getElementById('resend-code').style.display = 'inline';
+          }
+        }, 1000);
+      }
+      
+      // Resend code functionality
+      document.getElementById('resend-code').addEventListener('click', function(e) {
+        e.preventDefault();
+        this.style.display = 'none';
+        sendVerificationCode();
+        startTimer(120, document.getElementById('verification-timer'));
+      });
+      
+      // Send verification code (simulated)
+      function sendVerificationCode() {
+        const countryCode = document.getElementById('country-code').value;
+        const phoneNumber = document.getElementById('phone').value;
+        const fullNumber = countryCode + phoneNumber;
+        
+        // In a real app, you would send this to your backend which would then
+        // send an actual SMS to the user's phone
+        const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+        localStorage.setItem('verificationCode', verificationCode);
+        
+        document.getElementById('verification-phone').textContent = fullNumber;
+        document.getElementById('info-text').textContent = `Verification code sent to ${fullNumber} (simulated: ${verificationCode})`;
+        document.getElementById('info-message').style.display = 'flex';
+        
+        // Show verification section
+        document.getElementById('verification-section').classList.add('active');
+        startTimer(120, document.getElementById('verification-timer'));
+      }
+      
+      // Verify code (simulated)
+      function verifyCode() {
+        const enteredCode = Array.from(verificationInputs)
+          .map(input => input.value)
+          .join('');
+        
+        const correctCode = localStorage.getItem('verificationCode');
+        
+        if (enteredCode === correctCode) {
+          document.getElementById('info-text').textContent = 'Phone number verified successfully!';
+          document.getElementById('info-message').style.display = 'flex';
+          document.getElementById('register-btn').disabled = false;
+        } else {
+          showError('Invalid verification code. Please try again.');
+          verificationInputs.forEach(input => input.value = '');
+          verificationInputs[0].focus();
+        }
+      }
+      
+      // Form validation and submission
+      const registerForm = document.getElementById('register-form');
+      const errorMessage = document.getElementById('error-message');
+      const errorText = document.getElementById('error-text');
+      
+      registerForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Reset error message
+        errorMessage.style.display = 'none';
+        
+        // Get form values
+        const username = this.username.value.trim();
+        const email = this.email.value.trim();
+        const countryCode = document.getElementById('country-code').value;
+        const phone = this.phone.value.trim();
+        const password = this.password.value;
+        const password2 = this.password2.value;
+        const termsAccepted = this.terms.checked;
+        const fullPhone = countryCode + phone;
+        
+        // Validate username
+        if (!username || username.length < 3) {
+          showError('Username must be at least 3 characters');
+          return;
+        }
+        
+        if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+          showError('Username can only contain letters, numbers and underscores');
+          return;
+        }
+        
+        // Validate email
+        if (!email || !isValidEmail(email)) {
+          showError('Please enter a valid email address');
+          return;
+        }
+        
+        // Validate phone number
+        if (!phone || !/^[0-9]{9,15}$/.test(phone)) {
+          showError('Please enter a valid phone number');
+          return;
+        }
+        
+        // Validate password
+        if (!password || password.length < 8) {
+          showError('Password must be at least 8 characters');
+          return;
+        }
+        
+        if (password !== password2) {
+          showError('Passwords do not match');
+          return;
+        }
+        
+        // Validate terms
+        if (!termsAccepted) {
+          showError('You must accept the terms and conditions');
+          return;
+        }
+        
+        // Check if verification is complete
+        if (!localStorage.getItem('phoneVerified')) {
+          // First submission - send verification code
+          sendVerificationCode();
+          document.getElementById('register-btn').disabled = true;
+          return;
+        }
+        
+        // Simulate registration request (replace with actual API call)
+        try {
+          // Show loading state
+          const submitBtn = this.querySelector('button[type="submit"]');
+          const originalBtnText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
+          submitBtn.disabled = true;
+          
+          // Simulate network delay
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          
+          // Check if user already exists (simulated)
+          const users = JSON.parse(localStorage.getItem('zacticUsers')) || [];
+          const userExists = users.some(user => 
+            user.email === email || user.username === username || user.phone === fullPhone
+          );
+          
+          if (userExists) {
+            showError('An account with this email, username or phone number already exists');
+          } else {
+            // Create new user
+            const newUser = {
+              id: Date.now(),
+              username,
+              email,
+              phone: fullPhone,
+              password: btoa(password), // Note: In real app, use proper hashing!
+              createdAt: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('zacticUsers', JSON.stringify(users));
+            
+            // Clear verification flag
+            localStorage.removeItem('phoneVerified');
+            localStorage.removeItem('verificationCode');
+            
+            // Show success and redirect
+            errorMessage.className = 'message success';
+            errorText.innerHTML = '<i class="fas fa-check-circle message-icon"></i> Registration successful! Redirecting...';
+            errorMessage.style.display = 'flex';
+            
+            setTimeout(() => {
+              window.location.href = 'dashboard.html';
+            }, 1500);
+          }
+        } catch (error) {
+          showError('An error occurred. Please try again later.');
+        } finally {
+          // Reset button state if not redirecting
+          if (!errorMessage.classList.contains('success')) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+          }
+        }
+      });
+      
+      function showError(message) {
+        errorText.textContent = message;
+        errorMessage.className = 'message error';
+        errorMessage.style.display = 'flex';
+        
+        // Scroll to error message
+        errorMessage.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }
+      
+      function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+      }
+    });
+  </script>
+</body>
+</html>

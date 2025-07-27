@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join the ZACTIC Hub community - Discuss cybersecurity threats and share knowledge">
+  <title>ZACTIC Hub – Cybersecurity Community</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --primary-dark: #0b5ed7;
+      --primary-light: #e7f1ff;
+      --secondary: #6c757d;
+      --success: #198754;
+      --danger: #dc3545;
+      --warning: #ffc107;
+      --bg-light: #f9fafb;
+      --gray-dark: #343a40;
+      --gray-medium: #6c757d;
+      --gray-light: #e9ecef;
+      --font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --border-radius: 0.375rem;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg-light);
+      color: var(--gray-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+    
+    /* Skip to content link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px;
+      z-index: 100;
+      transition: top 0.3s;
+    }
+    
+    .skip-link:focus {
+      top: 0;
+    }
+    
+    /* Navigation */
+    nav {
+      background: white;
+      padding: 1rem 2rem;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .navbar-brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .navbar-brand i {
+      font-size: 1.2em;
+    }
+    
+    .navbar-nav {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    
+    .navbar-nav a {
+      text-decoration: none;
+      color: var(--gray-dark);
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: var(--transition);
+    }
+    
+    .navbar-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+    
+    .navbar-nav a.active,
+    .navbar-nav a:hover {
+      color: var(--primary);
+    }
+    
+    .navbar-nav a.active::after,
+    .navbar-nav a:hover::after {
+      width: 100%;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 0.9rem;
+      text-align: center;
+      border: 2px solid transparent;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Main content */
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      flex-grow: 1;
+    }
+    
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .page-header h1 {
+      color: var(--primary);
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .page-header p {
+      color: var(--gray-medium);
+      font-size: 1.1rem;
+    }
+    
+    /* Discussion form */
+    .discussion-form {
+      background: white;
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 3rem;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--gray-dark);
+    }
+    
+    .form-label.required::after {
+      content: '*';
+      color: var(--danger);
+      margin-left: 0.25rem;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid var(--gray-light);
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+    
+    .btn-submit {
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+    
+    /* Discussion list */
+    .discussion-list {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .discussion-list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+    
+    .discussion-list-header h2 {
+      color: var(--primary);
+      margin: 0;
+    }
+    
+    .sort-options {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .sort-label {
+      color: var(--gray-medium);
+      font-size: 0.9rem;
+    }
+    
+    .sort-select {
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--gray-light);
+      background-color: white;
+    }
+    
+    .discussion-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+    
+    .discussion-item:last-child {
+      border-bottom: none;
+    }
+    
+    .discussion-title {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+    }
+    
+    .discussion-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    .discussion-title a:hover {
+      text-decoration: underline;
+    }
+    
+    .discussion-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: var(--gray-medium);
+    }
+    
+    .discussion-author {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .discussion-content {
+      margin-bottom: 1rem;
+      color: var(--gray-dark);
+      white-space: pre-wrap;
+    }
+    
+    .discussion-actions {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .discussion-action {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--gray-medium);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .discussion-action:hover {
+      color: var(--primary);
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: var(--gray-medium);
+    }
+    
+    .empty-state i {
+      font-size: 3rem;
+      color: var(--gray-light);
+      margin-bottom: 1rem;
+    }
+    
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      gap: 0.5rem;
+    }
+    
+    .pagination-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: white;
+      color: var(--gray-dark);
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid var(--gray-light);
+    }
+    
+    .pagination-link:hover,
+    .pagination-link.active {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      
+      .navbar-nav {
+        margin: 1rem 0;
+      }
+      
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .discussion-form {
+        padding: 1.5rem;
+      }
+      
+      .form-actions {
+        flex-direction: column;
+      }
+      
+      .btn-submit {
+        width: 100%;
+      }
+      
+      .discussion-list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate {
+      animation: fadeIn 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <nav>
+    <a href="index.html" class="navbar-brand">
+      <i class="fas fa-shield-alt"></i> ZACTIC Hub
+    </a>
+    <ul class="navbar-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="reports.html">Threat Reports</a></li>
+      <li><a href="community.html" class="active">Community</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <div class="auth-buttons">
+      <a href="login.html" class="btn btn-outline">Login</a>
+      <a href="register.html" class="btn btn-primary">Register</a>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <div class="page-header animate">
+      <h1>Community Discussions</h1>
+      <p>Connect with cybersecurity professionals and discuss emerging threats</p>
+    </div>
+    
+    <form id="post-form" class="discussion-form animate" style="animation-delay: 0.1s;">
+      <div class="form-group">
+        <label for="author" class="form-label required">Your Name</label>
+        <input type="text" id="author" name="author" class="form-control" required placeholder="Your full name">
+      </div>
+      
+      <div class="form-group">
+        <label for="title" class="form-label required">Discussion Title</label>
+        <input type="text" id="title" name="title" class="form-control" required placeholder="Enter a descriptive title">
+      </div>
+      
+      <div class="form-group">
+        <label for="content" class="form-label required">Content</label>
+        <textarea id="content" name="content" class="form-control" required placeholder="Share your thoughts, questions, or insights..."></textarea>
+      </div>
+      
+      <div class="form-actions">
+        <button type="reset" class="btn btn-outline">Clear</button>
+        <button type="submit" class="btn btn-primary btn-submit">
+          <i class="fas fa-paper-plane"></i> Post Discussion
+        </button>
+      </div>
+    </form>
+    
+    <div class="discussion-list animate" style="animation-delay: 0.2s;">
+      <div class="discussion-list-header">
+        <h2>Recent Discussions</h2>
+        <div class="sort-options">
+          <span class="sort-label">Sort by:</span>
+          <select class="sort-select" id="sort-select">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="popular">Most Popular</option>
+          </select>
+        </div>
+      </div>
+      
+      <div id="post-list">
+        <!-- Discussions will be loaded here -->
+      </div>
+      
+      <div class="pagination">
+        <a href="#" class="pagination-link active">1</a>
+        <a href="#" class="pagination-link">2</a>
+        <a href="#" class="pagination-link">3</a>
+        <a href="#" class="pagination-link">
+          <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div class="social-links">
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+    </div>
+    <p>&copy; 2025 ZACTIC Hub | Zambia Cyber Threat Intelligence Community</p>
+    <p><small>Made with <i class="fas fa-heart" style="color: #dc3545;"></i> for Zambia's cybersecurity</small></p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize posts from localStorage or with sample data
+      let posts = JSON.parse(localStorage.getItem('communityPosts')) || [];
+      
+      // Add sample data if empty
+      if (posts.length === 0) {
+        posts = [
+          {
+            id: 1,
+            author: "Jane Banda",
+            title: "Recent phishing attacks targeting Zambian banks",
+            content: "I've noticed an increase in sophisticated phishing emails pretending to be from Zambian financial institutions. They're using local phone numbers and Zambian English patterns. Has anyone else observed this trend?",
+            timestamp: Date.now() - 86400000, // 1 day ago
+            likes: 5,
+            comments: 3
+          },
+          {
+            id: 2,
+            author: "Kelvin Mwale",
+            title: "Best practices for SME cybersecurity",
+            content: "Many small businesses in Zambia are vulnerable to cyber attacks. Here are some cost-effective measures I recommend:\n\n1. Enable 2FA for all accounts\n2. Regular employee training\n3. Automated backups\n4. Basic endpoint protection\n\nWhat would you add to this list?",
+            timestamp: Date.now() - 172800000, // 2 days ago
+            likes: 8,
+            comments: 5
+          }
+        ];
+        localStorage.setItem('communityPosts', JSON.stringify(posts));
+      }
+      
+      // DOM elements
+      const postForm = document.getElementById('post-form');
+      const postListEl = document.getElementById('post-list');
+      const sortSelect = document.getElementById('sort-select');
+      
+      // Render posts function
+      function renderPosts(sortBy = 'newest') {
+        let sortedPosts = [...posts];
+        
+        // Sort posts
+        switch(sortBy) {
+          case 'newest':
+            sortedPosts.sort((a, b) => b.timestamp - a.timestamp);
+            break;
+          case 'oldest':
+            sortedPosts.sort((a, b) => a.timestamp - b.timestamp);
+            break;
+          case 'popular':
+            sortedPosts.sort((a, b) => (b.likes + b.comments) - (a.likes + a.comments));
+            break;
+        }
+        
+        // Generate HTML
+        if (sortedPosts.length === 0) {
+          postListEl.innerHTML = `
+            <div class="empty-state">
+              <i class="far fa-comments"></i>
+              <h3>No discussions yet</h3>
+              <p>Be the first to start a discussion!</p>
+            </div>
+          `;
+          return;
+        }
+        
+        let html = '';
+        sortedPosts.forEach(post => {
+          const postDate = new Date(post.timestamp);
+          const formattedDate = postDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+          
+          html += `
+            <div class="discussion-item" id="post-${post.id}">
+              <h3 class="discussion-title">
+                <a href="#post-${post.id}">${post.title}</a>
+              </h3>
+              <div class="discussion-meta">
+                <span class="discussion-author">
+                  <i class="fas fa-user"></i> ${post.author}
+                </span>
+                <span><i class="fas fa-clock"></i> ${formattedDate}</span>
+              </div>
+              <div class="discussion-content">${post.content.replace(/\n/g, '<br>')}</div>
+              <div class="discussion-actions">
+                <a href="#" class="discussion-action" data-post-id="${post.id}" data-action="like">
+                  <i class="far fa-thumbs-up"></i> ${post.likes || 0} Likes
+                </a>
+                <a href="#" class="discussion-action" data-post-id="${post.id}" data-action="comment">
+                  <i class="far fa-comment"></i> ${post.comments || 0} Comments
+                </a>
+                <a href="#" class="discussion-action" data-post-id="${post.id}" data-action="share">
+                  <i class="fas fa-share"></i> Share
+                </a>
+              </div>
+            </div>
+          `;
+        });
+        
+        postListEl.innerHTML = html;
+        
+        // Add event listeners to action buttons
+        document.querySelectorAll('.discussion-action').forEach(button => {
+          button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const postId = parseInt(this.getAttribute('data-post-id'));
+            const action = this.getAttribute('data-action');
+            
+            handlePostAction(postId, action);
+          });
+        });
+      }
+      
+      // Handle post actions (like, comment, share)
+      function handlePostAction(postId, action) {
+        const postIndex = posts.findIndex(post => post.id === postId);
+        
+        if (postIndex === -1) return;
+        
+        switch(action) {
+          case 'like':
+            if (!posts[postIndex].likes) posts[postIndex].likes = 0;
+            posts[postIndex].likes++;
+            break;
+          case 'comment':
+            if (!posts[postIndex].comments) posts[postIndex].comments = 0;
+            posts[postIndex].comments++;
+            const commentText = prompt('Enter your comment:');
+            if (commentText) {
+              // In a real app, you would add the comment to the post
+              alert('Comment added! (This would be saved in a real application)');
+            }
+            break;
+          case 'share':
+            alert(`Share link for post #${postId}:\n\n${window.location.href.split('#')[0]}#post-${postId}`);
+            break;
+        }
+        
+        localStorage.setItem('communityPosts', JSON.stringify(posts));
+        renderPosts(sortSelect.value);
+      }
+      
+      // Form submission
+      postForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const author = this.author.value.trim();
+        const title = this.title.value.trim();
+        const content = this.content.value.trim();
+        
+        if (!author || !title || !content) {
+          alert('Please fill out all required fields.');
+          return;
+        }
+        
+        const newPost = {
+          id: Date.now(),
+          author,
+          title,
+          content,
+          timestamp: Date.now(),
+          likes: 0,
+          comments: 0
+        };
+        
+        posts.push(newPost);
+        localStorage.setItem('communityPosts', JSON.stringify(posts));
+        
+        // Reset form and render posts
+        this.reset();
+        renderPosts(sortSelect.value);
+        
+        // Scroll to the new post
+        setTimeout(() => {
+          document.getElementById(`post-${newPost.id}`).scrollIntoView({
+            behavior: 'smooth'
+          });
+        }, 100);
+      });
+      
+      // Sort change handler
+      sortSelect.addEventListener('change', function() {
+        renderPosts(this.value);
+      });
+      
+      // Initial render
+      renderPosts();
+      
+      // Check if we're linked to a specific post
+      if (window.location.hash) {
+        const postElement = document.querySelector(window.location.hash);
+        if (postElement) {
+          setTimeout(() => {
+            postElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }, 300);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
